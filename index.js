@@ -18,6 +18,22 @@ app.use(express.urlencoded({
 
 app.use(express.json())
 
+app.post('/excluir', (requisicao, resposta) => {
+    const id = requisicao.body.id
+    const sql = `
+        DELETE FROM tarefas
+        WHERE id = ${id}
+    `
+
+    conexao.query(sql, (erro) => {
+        if (erro) {{
+            return console.log(erro)
+        }}
+
+        resposta.redirect('/')
+    })
+})
+
 //rotas
 app.post('/completar', (requisicao, resposta) => {
     const id = requisicao.body.id

@@ -35,6 +35,18 @@ app.post('/excluir', (requisicao, resposta) => {
 })
 
 //rotas
+app.get('/limpartarefas', (requisicao, resposta) => {
+    const sql = 'DELETE FROM tarefas'
+
+    conexao.query(sql, (erro) => {
+        if (erro) {
+            return console.log(erro)
+        }
+
+        resposta.redirect('/')
+    })
+})
+
 app.post('/completar', (requisicao, resposta) => {
     const id = requisicao.body.id
 
